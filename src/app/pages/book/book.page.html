@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Receitas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <img [src]="receita.imagen" alt="">
+  <div class="card"> 
+  <ion-card >     
+    <ion-card-header>
+      
+      <ion-card-subtitle>{{ receita.title }}</ion-card-subtitle>      
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-card-title>Ingredientes:</ion-card-title>
+      <p>{{ receita.ingredientes }}</p>
+      
+      <ion-card-title>Modo de preparo:</ion-card-title>
+      <p>{{ receita.preparo }}</p>
+
+
+    </ion-card-content>
+  </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Formulário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <img [src]="receita.imagen" alt="imagem" style="height: 200px; width: 100%;">
+  
+  <div class="card">
+  <ion-card style="box-shadow: 0 0 0.5em #d47f5a;" mode="ios">
+
+    <form #form="ngForm" (submit)="capForm(form)" >
+      <ion-item >
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        <ion-input type="text" placeholder="http://imagem.com/imagem.png" name="imagen" [ngModel]="receita.imagen"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="bookmark-outline"></ion-icon>
+        <ion-input type="text" placeholder="Título" name="title" [ngModel]="receita.title"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="fast-food-outline"></ion-icon>
+        <ion-textarea type="text" placeholder="Ingredientes" name="ingredientes" [ngModel]="receita.ingredientes"></ion-textarea>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon slot="start" name="book-outline"></ion-icon>
+        <ion-textarea type="text" placeholder="Modo de preparo" name="preparo" [ngModel]="receita.preparo"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" shape="round" type="submit" color="secondary">Editar</ion-button>
+    </form>
+  </ion-card>
+</div>
+</ion-content>
