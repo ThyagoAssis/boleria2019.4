@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +8,15 @@ export class MessagensService {
 
   constructor(
     private alertControl: AlertController,
-    private loadingControl: LoadingController
+    private loadingControl: LoadingController,
+    private toastControl: ToastController
   ) { }
 
   //Alert Simples
-  async alertMessageSimple(message, duration){
+  async alertMessageSimple(header, duration){
     let alert = await this.alertControl.create({
       mode: 'ios',
-      message,
+      header,
       buttons: [
         {
           text: 'ok',
@@ -27,12 +28,26 @@ export class MessagensService {
 
   //Loading
   async loadMessage(message, duration){
-    let load = this.loadingControl.create({
+    const load = await this.loadingControl.create({
       mode: 'ios',
       message,
-      duration
+      duration,
+      translucent: true,
+      //cssClass: 'custom-class custom-loading',
+      //backdropDismiss: true
     });
 
-  await (await load).present
+  await load.present();
+  }
+
+  //Toast
+  async toastMessage(message, duration, color){
+    const toast = await this.toastControl.create({
+      mode: 'ios',
+      message,
+      duration,
+      color
+    });
+    toast.present();
   }
 }

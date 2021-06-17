@@ -1,7 +1,9 @@
 import { Component } from "@angular/core";
 import { AlertController, ToastController } from "@ionic/angular";
+import { AuthService } from "src/app/services/auth.service";
 
 import { FirebaseService } from "src/app/services/firebase.service";
+import { MessagensService } from "src/app/services/messagens.service";
 
 @Component({
     selector: 'app-footer',
@@ -14,7 +16,8 @@ export class FooterComponent {
     constructor(
         private alertControl: AlertController,
         private bd: FirebaseService,
-        private toastControl: ToastController
+        private messagensControl: MessagensService,
+        private authService: AuthService
     ) { }
 
     async alertCad() {
@@ -34,14 +37,14 @@ export class FooterComponent {
 
                         //Validação dos campos input do Alert
                         if (form.img.trim() < 1 || form.title.trim() < 1 || form.ingredientes.trim() < 1  || form.preparo.trim() < 1) {
-                            this.toastMessage('Campos Obrigatórios!', 4000, 'danger');
+                            this.messagensControl.toastMessage('Campos Obrigatórios!', 4000, 'danger');
                         } else {
                             try {
                                 let receita = { imagen: form.img, title: form.title, ingredientes: form.ingredientes, preparo: form.preparo }
                                 this.bd.addReceita(receita);
-                                this.toastMessage('Dados Cadastrados com Sucesso', 2000, 'secondary');
+                                this.messagensControl.toastMessage('Dados Cadastrados com Sucesso', 2000, 'secondary');
                             } catch (error) {
-                                this.toastMessage(error, 2000, 'danger');
+                                this.messagensControl.toastMessage(error, 2000, 'danger');
                             }
                         }
                     }
@@ -50,7 +53,7 @@ export class FooterComponent {
                     text: 'Cancelar',
                     role: 'Cancel',
                     handler: () => {
-                        this.toastMessage('Cancelado', 2000, 'danger');
+                        this.messagensControl.toastMessage('Cancelado', 2000, 'danger');
                     }
                 }
             ]
@@ -59,13 +62,13 @@ export class FooterComponent {
         await alert.present()
     }
 
-    async toastMessage(message, duration, color) {
-        const toast = await this.toastControl.create({
-            mode: 'ios',
-            message,
-            duration,
-            color
-        })
-        toast.present();
+   
+    logout(){
+        try {
+            this.authService.userLogout();
+            this.messagensControl.loadMessage('Saindo..', 2000);
+        } catch (error) {
+            this.messagensControl.toastMessage(error, 4000, 'danger')
+        }
     }
 }

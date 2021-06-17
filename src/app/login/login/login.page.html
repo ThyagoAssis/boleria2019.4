@@ -9,17 +9,17 @@
       </div>
         
       
-      <form>
+      <form [formGroup]="authForm" (submit)="singIn()">
         <ion-item lines="none">
           <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-input type="email" placeholder="meuemail@email.com"></ion-input>
+          <ion-input type="email" placeholder="meuemail@email.com" formControlName="email"></ion-input>
         </ion-item>
 
         <ion-item lines="none">
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input type="password" placeholder="Informe a senha"></ion-input>
+          <ion-input type="password" placeholder="Informe a senha" formControlName="password"></ion-input>
         </ion-item>
-        <ion-button type="submit" expand="block">Entrar</ion-button>
+        <ion-button type="submit" expand="block" [disabled]="authForm.invalid">Entrar</ion-button>
         
       </form>
       <ion-button expand="block"  color="secondary" routerLink="/caduser">Cadastre-se</ion-button>

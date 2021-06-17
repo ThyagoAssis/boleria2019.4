@@ -2,13 +2,12 @@
 <app-header titlePage="Produtos"></app-header>
 
 <!-- Corpo da Página -->
-<ion-content [fullscreen]="true">  
+<ion-content [fullscreen]="true">
 
   <ion-list>
     <ion-item-sliding *ngFor="let receita  of  bookRecipes">
 
       <ion-card style="border-radius: 30px; " >
-
         <ion-item lines="none" [routerLink]="['/book', receita.id]" >
           <ion-thumbnail slot="end" style="box-shadow: 0 0 1em #4e5667;">
             <ion-img [src]="receita.imagen"></ion-img>
